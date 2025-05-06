@@ -1,21 +1,22 @@
-package com.ing.store.model;
+package com.ing.store.model.entity;
 
+import com.ing.store.model.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
@@ -28,9 +29,12 @@ public class User implements UserDetails {
     @Column(nullable=false)
     private String password;
 
-    @Column
+    @Column(nullable=false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -45,25 +49,5 @@ public class User implements UserDetails {
     @Override
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }

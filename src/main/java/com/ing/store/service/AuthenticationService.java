@@ -6,7 +6,7 @@ import com.ing.store.dto.AuthenticationResponse;
 import com.ing.store.dto.RegisterRequest;
 import com.ing.store.exception.exceptions.AuthenticationException;
 import com.ing.store.model.Role;
-import com.ing.store.model.User;
+import com.ing.store.model.entity.User;
 import com.ing.store.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.exception.ConstraintViolationException;

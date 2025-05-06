@@ -1,7 +1,7 @@
 package com.ing.store.service;
 
 import com.ing.store.dto.UserDto;
-import com.ing.store.model.User;
+import com.ing.store.model.entity.User;
 import com.ing.store.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
