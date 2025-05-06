@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration {
 
     protected static final String[] WHITELIST = {
+            "/app/auth/**",
             "/h2-console",
             "/h2-console/**",
     };
