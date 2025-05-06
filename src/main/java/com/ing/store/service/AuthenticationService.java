@@ -4,7 +4,7 @@ import com.ing.store.config.security.JwtService;
 import com.ing.store.dto.AuthenticationRequest;
 import com.ing.store.dto.AuthenticationResponse;
 import com.ing.store.dto.RegisterRequest;
-import com.ing.store.exception.AuthenticationException;
+import com.ing.store.exception.exceptions.AuthenticationException;
 import com.ing.store.model.Role;
 import com.ing.store.model.User;
 import com.ing.store.repository.UserRepository;

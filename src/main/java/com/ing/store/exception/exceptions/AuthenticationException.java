@@ -1,4 +1,4 @@
-package com.ing.store.exception;
+package com.ing.store.exception.exceptions;
 
 import lombok.experimental.StandardException;
 
