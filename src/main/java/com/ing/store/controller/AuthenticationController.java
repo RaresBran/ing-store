@@ -8,11 +8,10 @@ import com.ing.store.service.AuthenticationService;
 import com.ing.store.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/app/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
@@ -29,9 +28,9 @@ public class AuthenticationController {
         return authenticationService.register(request);
     }
 
-    @GetMapping()
-    public UserDto getCurrentUser(Authentication authentication) {
-        return userService.getCurrentUser(authentication);
+    @GetMapping
+    public UserDto getCurrentUser() {
+        return userService.getCurrentUserDto();
     }
 }
 
