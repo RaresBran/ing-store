@@ -30,7 +30,11 @@ public class AuthenticationController {
 
     @GetMapping
     public UserDto getCurrentUser() {
-        return userService.getCurrentUserDto();
+        try {
+            return userService.getCurrentUserDto();
+        } catch (Exception e) {
+            throw new IllegalStateException("User not authenticated");
+        }
     }
 }
 
