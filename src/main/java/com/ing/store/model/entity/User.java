@@ -35,6 +35,7 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Order> orders = new ArrayList<>();
 
     @Override

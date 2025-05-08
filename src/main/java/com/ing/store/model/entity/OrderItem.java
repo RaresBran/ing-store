@@ -16,6 +16,7 @@ public class OrderItem {
     private Long id;
 
     @Column(nullable = false)
+    @Builder.Default
     private int quantity = 0;
 
     @ManyToOne

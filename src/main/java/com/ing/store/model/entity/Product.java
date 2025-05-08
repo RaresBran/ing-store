@@ -23,5 +23,6 @@ public class Product {
     private Double price;
 
     @Column(nullable = false)
+    @Builder.Default
     private Integer stock = 0;
 }
