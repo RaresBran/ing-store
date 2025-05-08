@@ -6,6 +6,7 @@ import com.ing.store.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class ProductService {
         try {
             Product product = productRepository.save(modelMapper.map(productDto, Product.class));
             return modelMapper.map(product, ProductDto.class);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid product data");
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("Product with this name already exists: " + productDto.getName());
         }
     }
 

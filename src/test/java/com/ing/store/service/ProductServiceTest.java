@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
@@ -100,13 +101,13 @@ class ProductServiceTest {
         when(modelMapper.map(dto, Product.class))
                 .thenReturn(Product.builder().name("Duplicate Product").price(15.0).stock(50).build());
 
-        // Simulate database exception, e.g. from a unique constraint violation
+        // Simulate a unique constraint violation
         when(productRepository.save(any(Product.class)))
-                .thenThrow(new RuntimeException("Unique constraint violation"));
+                .thenThrow(new DataIntegrityViolationException("Unique constraint violation"));
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> productService.create(dto));
 
-        assertEquals("Invalid product data", exception.getMessage());
+        assertEquals("Product with this name already exists: " + dto.getName(), exception.getMessage());
         verify(productRepository).save(any(Product.class));
     }
 
