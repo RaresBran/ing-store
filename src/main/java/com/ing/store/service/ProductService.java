@@ -23,8 +23,12 @@ public class ProductService {
     }
 
     public ProductDto create(ProductDto productDto) {
-        Product product = productRepository.save(modelMapper.map(productDto, Product.class));
-        return modelMapper.map(product, ProductDto.class);
+        try {
+            Product product = productRepository.save(modelMapper.map(productDto, Product.class));
+            return modelMapper.map(product, ProductDto.class);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid product data");
+        }
     }
 
     public ProductDto update(String id, ProductDto productDto) {

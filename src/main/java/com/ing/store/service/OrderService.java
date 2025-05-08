@@ -9,9 +9,9 @@ import com.ing.store.model.entity.User;
 import com.ing.store.repository.OrderRepository;
 import com.ing.store.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,13 +19,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class OrderService {
 
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
     private final UserService userService;
 
-    @Transactional
     public OrderResponseDto placeOrder(OrderRequestDto dto) {
         User user = userService.getCurrentUser();
 
